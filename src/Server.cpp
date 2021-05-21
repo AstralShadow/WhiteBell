@@ -1,0 +1,220 @@
+#include "Server.h"
+#include "Client.h"
+#include "Client_DisconnectedException.h"
+#include "config.h"
+#include <string>
+#include <unordered_set>
+#include <queue>
+#include <memory>
+#include <cstring>
+#include <sys/socket.h>
+#include <unistd.h>
+#include <cstdio>
+
+using std::string;
+using std::unordered_set;
+using std::queue;
+using std::shared_ptr;
+using std::weak_ptr;
+
+struct sockaddr_un
+{
+    sa_family_t sun_family = AF_UNIX;
+    char sun_path[108];
+};
+
+Server::Server(string location) :
+    server_address(generate_server_address(location)),
+    server_socket(create_unix_socket()),
+    connections(),
+    unprocessed(),
+    running(false)
+{
+    this->bind_socket();
+    this->listen();
+}
+
+sockaddr* Server::generate_server_address(string location)
+{
+    sockaddr_un* address = new sockaddr_un;
+    strcpy(address->sun_path, location.c_str());
+    return reinterpret_cast<sockaddr*>(address);
+}
+
+ssize_t Server::create_unix_socket()
+{
+    ssize_t fd = socket(AF_UNIX, SOCK_STREAM, 0);
+    if(fd < 0){
+        perror("Could not create socket.");
+        exit(1);
+    }
+    return fd;
+}
+
+void Server::bind_socket()
+{
+    ssize_t source_fd = this->server_socket;
+    if(bind(source_fd, this->server_address, sizeof(struct sockaddr_un))){
+        perror("Binding error.");
+        exit(1);
+    }
+}
+
+void Server::listen()
+{
+    ssize_t source_fd = this->server_socket;
+    if(::listen(source_fd, config::max_pending_connections)){
+        perror("Listen error.");
+        exit(1);
+    }
+}
+
+Server::~Server()
+{
+    this->disconnect_all_clients();
+    close(this->server_socket);
+
+    sockaddr_un* address = reinterpret_cast<sockaddr_un*>(this->server_address);
+    remove(address->sun_path);
+    delete this->server_address;
+}
+
+void Server::disconnect_all_clients()
+{
+    connections.clear();
+}
+
+void Server::run()
+{
+    if(this->running){
+        //this->run_worker_thread();
+        // TODO implement multithreading.
+        return;
+    }
+
+    this->run_main_thread();
+}
+
+void Server::stop()
+{
+    this->running = false;
+}
+
+void Server::run_main_thread()
+{
+    fd_set connection_set;
+    this->running = true;
+
+    while(running){
+        fill_with_fd(connection_set);
+        wait_for_input(connection_set);
+        queue_clients_with_input(connection_set);
+        accept_new_client_if_avaliable(connection_set);
+        process_clients_input();
+    }
+}
+
+void Server::fill_with_fd(fd_set& target)
+{
+    FD_ZERO(&target);
+    FD_SET(this->server_socket, &target);
+
+    auto &clients = this->connections;
+    for(auto itr = clients.begin(); itr != clients.end(); ++itr){
+        Client* client = itr->get();
+        FD_SET(client->get_fd(), &target);
+    }
+}
+
+void Server::wait_for_input(fd_set& connection_set)
+{
+    int largest_fd = this->find_largest_fd();
+    int limit = largest_fd + 1;
+    if(select(limit, &connection_set, nullptr, nullptr, NULL) < 0){
+        perror("Select error.");
+    }
+}
+
+ssize_t Server::find_largest_fd()
+{
+    ssize_t largest = this->server_socket;
+    for(auto itr = connections.begin(); itr != connections.end(); ++itr){
+        Client* client = itr->get();
+        if(largest < client->get_fd()){
+            largest = client->get_fd();
+        }
+    }
+    return largest;
+}
+
+void Server::queue_clients_with_input(fd_set& connection_set)
+{
+    auto &clients = this->connections;
+
+    for(auto itr = clients.begin(); itr != clients.end(); ++itr){
+        Client* client = itr->get();
+        ssize_t fd = client->get_fd();
+        if(FD_ISSET(fd, &connection_set)){
+            FD_CLR(fd, &connection_set);
+            this->unprocessed.push(weak_ptr<Client>(*itr));
+        }
+    }
+}
+
+void Server::accept_new_client_if_avaliable(fd_set& connection_set)
+{
+    ssize_t server_fd = this->server_socket;
+    if(FD_ISSET(server_fd, &connection_set)){
+        FD_CLR(server_fd, &connection_set);
+        this->accept_new_client();
+    }
+}
+
+void Server::accept_new_client()
+{
+    ssize_t server_fd = this->server_socket;
+    sockaddr* address = this->server_address;
+    socklen_t address_size = sizeof(struct sockaddr_un);
+
+    ssize_t client_fd = accept4(server_fd, address, &address_size, SOCK_NONBLOCK);
+
+    if(client_fd < 0){
+        perror("Error while accepting client.");
+        return;
+    }
+
+    this->add_client(client_fd);
+}
+
+void Server::add_client(ssize_t client_fd)
+{
+    Client* client = new Client(client_fd, this);
+    this->connections.emplace(client);
+}
+
+void Server::remove_client(shared_ptr<Client> client)
+{
+    auto itr = this->connections.find(client);
+    this->connections.erase(itr);
+}
+
+void Server::process_clients_input()
+{
+    while(this->unprocessed.size() > 0){
+        weak_ptr<Client> wp = this->unprocessed.front();
+        shared_ptr<Client> sp = wp.lock();
+        this->unprocessed.pop();
+        if(sp){
+            Client* client = sp.get();
+            try{
+                client->receive_input();
+                client->parse_input();
+            }catch(Client::DisconnectedException&){
+                this->remove_client(sp);
+            }
+        }
+    }
+}
+
+
+

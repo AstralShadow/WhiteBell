@@ -1,0 +1,6 @@
+Events - just a notification with a name and payload. one can send or listen for it.
+Namespaces - to not need seperate copies of the program running.
+Counters - counts active connections marked to given counter
+CounterEvents - allow listening to events that include simple comparasion and counters (= < >) and onChange
+ - default values for counters are zero, so any non-existent counter is treated as a zero, and any zero-ed counter is to be removed from memory.
+

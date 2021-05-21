@@ -1,0 +1,71 @@
+# depslib dependency file v1.0
+1621615652 source:/workspace/c++/WhiteBell/src/Server.cpp
+	"Server.h"
+	"Client.h"
+	"Client_DisconnectedException.h"
+	"config.h"
+	<string>
+	<unordered_set>
+	<queue>
+	<memory>
+	<cstring>
+	<sys/socket.h>
+	<unistd.h>
+	<cstdio>
+
+1621614320 /workspace/c++/WhiteBell/include/Server.h
+	<string>
+	<unordered_set>
+	<queue>
+	<memory>
+
+1621608031 source:/workspace/c++/WhiteBell/src/config.cpp
+	"config.h"
+	<cstdint>
+	<string>
+
+1621255748 /workspace/c++/WhiteBell/include/config.h
+	<string>
+	<cstdint>
+
+1621254595 source:/workspace/c++/WhiteBell/main.cpp
+	<iostream>
+	<signal.h>
+	"include/config.h"
+	"include/Server.h"
+
+1621611546 source:/workspace/c++/WhiteBell/src/Client.cpp
+	"Client.h"
+	"Client_InputBuffer.h"
+	"Client_DisconnectedException.h"
+	"Server.h"
+
+1621615619 /workspace/c++/WhiteBell/include/Client.h
+	<sys/socket.h>
+	<cstdint>
+
+1621611337 source:/workspace/c++/WhiteBell/src/Client_InputBuffer.cpp
+	"Client.h"
+	"Client_InputBuffer.h"
+	"Client_DisconnectedException.h"
+	<cstdint>
+	<sys/socket.h>
+	<vector>
+	<algorithm>
+
+1621615576 /workspace/c++/WhiteBell/include/Client_InputBuffer.h
+	"Client.h"
+	<sys/socket.h>
+	<cstdint>
+	<vector>
+
+1621611503 source:/workspace/c++/WhiteBell/src/Client_DisconnectedException.cpp
+	"Client.h"
+	"Client_DisconnectedException.h"
+	<string>
+
+1621615673 /workspace/c++/WhiteBell/include/Client_DisconnectedException.h
+	"Client.h"
+	<string>
+	<exception>
+
