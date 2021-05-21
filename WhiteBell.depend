@@ -41,9 +41,10 @@
 	"Client_Parser.h"
 	"Server.h"
 
-1621617688 /workspace/c++/WhiteBell/include/Client.h
+1621629860 /workspace/c++/WhiteBell/include/Client.h
 	<sys/socket.h>
 	<cstdint>
+	<vector>
 
 1621611337 source:/workspace/c++/WhiteBell/src/Client_InputBuffer.cpp
 	"Client.h"
@@ -70,10 +71,12 @@
 	<string>
 	<exception>
 
-1621617895 /workspace/c++/WhiteBell/include/Client_Parser.h
+1621629708 /workspace/c++/WhiteBell/include/Client_Parser.h
 	"Client.h"
+	<cstdint>
+	<vector>
 
-1621617910 source:/workspace/c++/WhiteBell/src/Client_Parser.cpp
+1621626426 source:/workspace/c++/WhiteBell/src/Client_Parser.cpp
 	"Client.h"
 	"Client_Parser.h"
 	"Client_InputBuffer.h"

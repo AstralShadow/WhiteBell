@@ -3,6 +3,9 @@
 
 #include <sys/socket.h>
 #include <cstdint>
+#include <vector>
+
+using std::vector;
 
 class Server;
 
@@ -23,6 +26,14 @@ class Client
         void parse_input();
 
     protected:
+        void set_namespace(vector<uint8_t> name);
+        void track_event(vector<uint8_t> name);
+        void untrack_event(vector<uint8_t> name);
+        void trigger_event(vector<uint8_t> name, vector<uint8_t> payload);
+        void track_counter(vector<uint8_t> name);
+        void untrack_counter(vector<uint8_t> name);
+        void join_counter(vector<uint8_t> name);
+        void leave_counter(vector<uint8_t> name);
 
     private:
         class InputBuffer;
