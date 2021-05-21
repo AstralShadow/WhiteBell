@@ -1,0 +1,31 @@
+PROTOCOL VERSION 1
+
++--------+--------+-------------------+-------------------+--
+| flags  | opcode |    Name length    |  Payload* Length  |
++--------+--------+-------------------+-------------------+--
+| 4 bits | 4 bits |       8 bits      |      16 bits      |
++--------+--------+-------------------+-------------------+--
+
+--+-----------+-------------+
+  |   Name    |   Payload*  |
+--+-----------+-------------+
+  |  N bytes  |  0-N bytes  |
+--+-----------+-------------+
+
+Operation codes (0-15):
+0 - set namespace
+1 - track event
+2 - stop tracking event
+3 - trigger event
+4 - track counter
+5 - stop tracking counter
+6 - attach to counter
+7 - deattach from counter
+8-15 reserved for future ideas
+
+Flags (1-4)
+1-4 reserved for future ideas
+
+*Payload is only used when opcode is "trigger event"
+
+Note: when receiving "track counter" opcode, the server immediately sends the counter's current value.

@@ -1,0 +1,41 @@
+PROTOCOL VERSION 1
+
+Header:
++--------+--------+
+| flags  | opcode |
++--------+--------+
+| 4 bits | 4 bits |
++--------+--------+
+
+Operation codes (0-15):
+0 - protovol version
+1 - event triggered
+2 - counter changed
+3-15 reserved for future ideas
+
+Flags (1-4)
+1-4 reserved for future ideas
+
+
+Content:
+
+OPCODE == protovol version
++--------------------+
+|  Protocol version  |
++--------------------+
+|      8 bits        |
++--------------------+
+
+OPCODE == event triggered
++---------------+------------------+-----------+-----------+
+|  Name length  |  Payload Length  |   Name    |  Payload  |
++---------------+------------------+-----------+-----------+
+|    8 bits     |     16 bits      |  N bytes  |  N bytes  |
++---------------+------------------+-----------+-----------+
+
+OPCODE == counter changed
++---------------+-----------------+-----------+
+|  Name length  |  Counter value  |   Name    |
++---------------+-----------------+-----------+
+|    8 bits     |  32 bits        |  N bytes  |
++---------------+-----------------+-----------+

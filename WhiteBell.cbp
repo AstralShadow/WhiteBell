@@ -58,13 +58,22 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="LICENSE" />
+		<Unit filename="README.md" />
 		<Unit filename="include/Client.h" />
+		<Unit filename="include/Client_DisconnectedException.h" />
 		<Unit filename="include/Client_InputBuffer.h" />
+		<Unit filename="include/Client_Parser.h" />
 		<Unit filename="include/Server.h" />
 		<Unit filename="include/config.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="notes/features.txt" />
+		<Unit filename="notes/input.txt" />
+		<Unit filename="notes/output.txt" />
 		<Unit filename="src/Client.cpp" />
+		<Unit filename="src/Client_DisconnectedException.cpp" />
 		<Unit filename="src/Client_InputBuffer.cpp" />
+		<Unit filename="src/Client_Parser.cpp" />
 		<Unit filename="src/Server.cpp" />
 		<Unit filename="src/config.cpp" />
 		<Extensions />

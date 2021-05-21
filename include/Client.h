@@ -26,10 +26,12 @@ class Client
 
     private:
         class InputBuffer;
+        class Parser;
 
         Server* server;
         ssize_t fd;
         InputBuffer* buffer;
+        Parser* parser;
 
 
 };
