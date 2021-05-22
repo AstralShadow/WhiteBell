@@ -148,6 +148,7 @@ void Client::Parser::read_payload()
 void Client::Parser::process_packet()
 {
     switch(this->opcode){
+        default:
         case OPCode::undefined:
             return;
 

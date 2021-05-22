@@ -53,8 +53,8 @@ class Client::Parser
         OPCode opcode = OPCode::undefined;
         uint8_t name_length = 0;
         uint16_t payload_length = 0;
-        vector<uint8_t> name = {};
-        vector<uint8_t> payload = {};
+        name_t name = {};
+        payload_t payload = {};
 
         size_t required_input_size() const;
         void increase_step();

@@ -1,6 +1,7 @@
 #include "Server.h"
 #include "Client.h"
 #include "Client_DisconnectedException.h"
+#include "Namespace.h"
 #include "config.h"
 #include <string>
 #include <unordered_set>
@@ -25,10 +26,7 @@ struct sockaddr_un
 
 Server::Server(string location) :
     server_address(generate_server_address(location)),
-    server_socket(create_unix_socket()),
-    connections(),
-    unprocessed(),
-    running(false)
+    server_socket(create_unix_socket())
 {
     this->bind_socket();
     this->listen();
@@ -216,5 +214,24 @@ void Server::process_clients_input()
     }
 }
 
+shared_ptr<Namespace> Server::get_namespace(name_t name)
+{
+    auto itr = this->namespaces.begin();
+    while(itr != this->namespaces.end()){
+        shared_ptr<Namespace> ptr = itr->lock();
+        if(!ptr){
+            itr = this->namespaces.erase(itr);
+            continue;
+        }
 
+        if(ptr->get_name() == name)
+            return ptr;
+
+        ++itr;
+    }
+
+    shared_ptr<Namespace> ptr(new Namespace(name));
+    this->namespaces.push_back(weak_ptr<Namespace>(ptr));
+    return ptr;
+}
 

@@ -64,6 +64,7 @@
 		<Unit filename="include/Client_DisconnectedException.h" />
 		<Unit filename="include/Client_InputBuffer.h" />
 		<Unit filename="include/Client_Parser.h" />
+		<Unit filename="include/Namespace.h" />
 		<Unit filename="include/Server.h" />
 		<Unit filename="include/config.h" />
 		<Unit filename="main.cpp" />
@@ -74,6 +75,7 @@
 		<Unit filename="src/Client_DisconnectedException.cpp" />
 		<Unit filename="src/Client_InputBuffer.cpp" />
 		<Unit filename="src/Client_Parser.cpp" />
+		<Unit filename="src/Namespace.cpp" />
 		<Unit filename="src/Server.cpp" />
 		<Unit filename="src/config.cpp" />
 		<Extensions />

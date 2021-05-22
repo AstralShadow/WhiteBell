@@ -32,4 +32,6 @@ void signal_callback_handler(int signum)
         cout << "Program interrupted with signal " << signum << endl;
     }
     server->stop();
+    delete server;
+    exit(0);
 }
