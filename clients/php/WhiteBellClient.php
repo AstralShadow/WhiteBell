@@ -2,7 +2,7 @@
 
 namespace WhiteBell;
 
-class UnsupportedServerVersion extends \Excaption
+class UnsupportedServerVersion extends \Exception
 {
 
     public int $supportedVersion;
@@ -47,7 +47,7 @@ class Client
         "leaveCounter" => 7
     ];
 
-    private Socket $socket;
+    private \Socket $socket;
 
     public function __construct(string $unixFD, string $namespace) {
         $this->connect($unixFD);
@@ -57,7 +57,7 @@ class Client
 
     private function connect(string $unitFD): void {
         $this->socket = socket_create(AF_UNIX, SOCK_STREAM, 0);
-        socket_connect($this->conn, $unitFD);
+        socket_connect($this->socket, $unitFD);
     }
 
     /* Namespace */
@@ -188,10 +188,11 @@ class Client
 
     public function fetch(): void {
         $input = "";
-        while ($res = socket_recv($this->conn, $input, 512, MSG_DONTWAIT)){
+        while ($res = socket_recv($this->socket, $input, 512, MSG_DONTWAIT)){
             if ($res === null){
                 throw socket_strerror(socket_last_error());
             }
+
             $this->inputBuffer .= $input;
         }
 
@@ -204,7 +205,7 @@ class Client
             $read = [$this->socket];
             $write = null;
             $error = null;
-            socket_select($read, $write, $error, 2);
+            socket_select($read, $write, $error, 3);
             if (count($read) > 0){
                 $this->fetch();
             }
@@ -340,7 +341,7 @@ class Client
         $input = $this->inputBuffer;
         $this->header = unpack('C', $input[0])[1];
         $this->inputBuffer = substr($input, 1);
-        switch ($this->header & 16){
+        switch ($this->header & 15){
             case self::INPUT_OPCODES["protocolVersion"]:
                 $this->processingStep = self::PROCESSING_STEPS["protocolVersion"];
                 break;
@@ -367,7 +368,7 @@ class Client
         $input = $this->inputBuffer;
         $this->nameLen = (int) unpack('C', $input[0])[1];
         $this->inputBuffer = substr($input, 1);
-        switch ($this->header & 16){
+        switch ($this->header & 15){
             case self::INPUT_OPCODES["eventTriggered"]:
                 $this->processingStep = self::PROCESSING_STEPS["payloadLen"];
                 break;
@@ -400,7 +401,7 @@ class Client
         $this->name = substr($input, 0, $this->nameLen);
         $this->inputBuffer = substr($input, $this->nameLen);
 
-        switch ($this->header & 16){
+        switch ($this->header & 15){
             case self::INPUT_OPCODES["eventTriggered"]:
                 $this->processingStep = self::PROCESSING_STEPS["payload"];
                 break;
@@ -430,11 +431,13 @@ class Client
         foreach ($this->counterListeners[$name] as $callback){
             $callback($value);
         }
+
+        $this->processingStep = self::PROCESSING_STEPS["header"];
     }
 
     private function callEventListeners(): void {
         $name = $this->name;
-        $payload = $this->pauload;
+        $payload = $this->payload;
 
         if (!isset($this->eventListeners[$name])){
             return;
@@ -442,6 +445,8 @@ class Client
         foreach ($this->eventListeners[$name] as $callback){
             $callback($payload);
         }
+
+        $this->processingStep = self::PROCESSING_STEPS["header"];
     }
 
 }

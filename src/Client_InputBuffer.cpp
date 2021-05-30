@@ -10,13 +10,10 @@ using std::vector;
 using std::copy;
 using std::move;
 
-Client::InputBuffer::InputBuffer() :
-    size(512),
-    buffer(new uint8_t[this->size]),
-    read_ptr(this->buffer),
-    write_ptr(this->buffer)
-{
-
+Client::InputBuffer::InputBuffer(){
+    this->buffer = new uint8_t[this->size];
+    this->read_ptr = this->buffer;
+    this->write_ptr = this->buffer;
 }
 
 Client::InputBuffer::~InputBuffer()
@@ -108,7 +105,7 @@ void Client::InputBuffer::receive_input(ssize_t fd)
         return;
     }
     if(received == 0){
-        throw new Client::DisconnectedException(fd);
+        throw Client::DisconnectedException(fd);
     }
 
     this->write_ptr += received;

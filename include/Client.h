@@ -28,7 +28,7 @@ class Client
         static const uint8_t protocol_version;
 
         ssize_t get_fd() const;
-        shared_ptr<Client> get_ptr() const;
+        shared_ptr<Client> get_ptr();
 
         vector<name_t> get_tracked_events() const;
         vector<name_t> get_tracked_counters() const;
@@ -55,16 +55,17 @@ class Client
         class InputBuffer;
         class Parser;
 
-        weak_ptr<Client> _self;
-        Server* server;
+        weak_ptr<Client>* _self = nullptr;
+
         ssize_t fd;
-        InputBuffer* buffer;
-        Parser* parser;
+        Server* server;
+        InputBuffer* buffer = nullptr;
+        Parser* parser = nullptr;
 
         shared_ptr<Namespace> _namespace = nullptr;
-        vector<name_t> tracked_events = {};
-        vector<name_t> tracked_counters = {};
-        vector<name_t> joined_counters = {};
+        vector<name_t> tracked_events;
+        vector<name_t> tracked_counters;
+        vector<name_t> joined_counters;
 
         enum struct OutputOPCode{
             version = 0,

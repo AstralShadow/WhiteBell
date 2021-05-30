@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1622200433 source:/workspace/c++/WhiteBell/src/Server.cpp
+1622368661 source:/workspace/c++/WhiteBell/src/Server.cpp
 	"Server.h"
 	"Client.h"
 	"Client_DisconnectedException.h"
@@ -32,14 +32,14 @@
 	<string>
 	<cstdint>
 
-1622200177 source:/workspace/c++/WhiteBell/main.cpp
+1622200535 source:/workspace/c++/WhiteBell/main.cpp
 	<iostream>
 	<signal.h>
 	"include/config.h"
 	"include/Server.h"
 	"include/Client.h"
 
-1622200486 source:/workspace/c++/WhiteBell/src/Client.cpp
+1622369021 source:/workspace/c++/WhiteBell/src/Client.cpp
 	"Client.h"
 	"Client_InputBuffer.h"
 	"Client_DisconnectedException.h"
@@ -48,14 +48,15 @@
 	"Namespace.h"
 	<algorithm>
 	<unistd.h>
+	<iostream>
 
-1621642038 /workspace/c++/WhiteBell/include/Client.h
+1622368915 /workspace/c++/WhiteBell/include/Client.h
 	<sys/socket.h>
 	<cstdint>
 	<vector>
 	<memory>
 
-1621611337 source:/workspace/c++/WhiteBell/src/Client_InputBuffer.cpp
+1622369213 source:/workspace/c++/WhiteBell/src/Client_InputBuffer.cpp
 	"Client.h"
 	"Client_InputBuffer.h"
 	"Client_DisconnectedException.h"
@@ -64,7 +65,7 @@
 	<vector>
 	<algorithm>
 
-1621615576 /workspace/c++/WhiteBell/include/Client_InputBuffer.h
+1622367257 /workspace/c++/WhiteBell/include/Client_InputBuffer.h
 	"Client.h"
 	<sys/socket.h>
 	<cstdint>
@@ -91,12 +92,12 @@
 	"Client_InputBuffer.h"
 	"Server.h"
 
-1621642246 source:/workspace/c++/WhiteBell/src/Namespace.cpp
+1622368476 source:/workspace/c++/WhiteBell/src/Namespace.cpp
 	"Namespace.h"
 	"Client.h"
 	<algorithm>
 
-1621642256 /workspace/c++/WhiteBell/include/Namespace.h
+1622367483 /workspace/c++/WhiteBell/include/Namespace.h
 	<cstdint>
 	<vector>
 	<memory>

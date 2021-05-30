@@ -4,7 +4,7 @@
 
 using std::find;
 
-Namespace::Namespace(const name_t& name) :
+Namespace::Namespace(name_t name) :
     _name(name)
 {
     // ctor

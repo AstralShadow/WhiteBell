@@ -8,16 +8,19 @@
 #include <unistd.h>
 
 using std::find;
+#include <iostream>
 
 const uint8_t Client::protocol_version = 1;
 
 Client::Client(ssize_t _fd, Server* _server) :
-    _self(shared_ptr<Client>(this)),
-    server(_server),
     fd(_fd),
-    buffer(new Client::InputBuffer()),
-    parser(new Client::Parser(this))
+    server(_server),
+    tracked_events(),
+    tracked_counters(),
+    joined_counters()
 {
+    this->buffer = new Client::InputBuffer();
+    this->parser = new Client::Parser(this);
     this->send_protocol_version();
 }
 
@@ -25,6 +28,7 @@ Client::~Client()
 {
     delete this->buffer;
     delete this->parser;
+    delete this->_self;
     ::shutdown(this->get_fd(), SHUT_WR);
     close(this->get_fd());
 }
@@ -34,9 +38,14 @@ ssize_t Client::get_fd() const
     return this->fd;
 }
 
-shared_ptr<Client> Client::get_ptr() const
+shared_ptr<Client> Client::get_ptr()
 {
-    return this->_self.lock();
+    if(this->_self == nullptr){
+        shared_ptr<Client> sp(this);
+        this->_self = new weak_ptr<Client>(sp);
+        return sp;
+    }
+    return this->_self->lock();
 }
 
 vector<name_t> Client::get_tracked_events() const

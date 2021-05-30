@@ -19,7 +19,7 @@ typedef vector<weak_ptr<Client>> client_list;
 class Namespace
 {
     public:
-        Namespace(const name_t&);
+        Namespace(name_t);
         virtual ~Namespace() = default;
 
         name_t get_name() const;

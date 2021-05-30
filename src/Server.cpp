@@ -29,10 +29,9 @@ struct sockaddr_un
     char sun_path[108];
 };
 
-Server::Server(string location) :
-    server_address(generate_server_address(location)),
-    server_socket(create_unix_socket())
-{
+Server::Server(string location){
+    this->server_address = generate_server_address(location);
+    this->server_socket = create_unix_socket();
     this->bind_socket();
     this->listen();
 }
@@ -196,7 +195,7 @@ void Server::accept_new_client()
 void Server::add_client(ssize_t client_fd)
 {
     Client* client = new Client(client_fd, this);
-    this->connections.emplace(client);
+    this->connections.insert(client->get_ptr());
 }
 
 void Server::remove_client(shared_ptr<Client> client)

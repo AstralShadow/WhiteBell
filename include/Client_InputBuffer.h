@@ -27,10 +27,10 @@ class Client::InputBuffer
     protected:
 
     private:
-        size_t size;
-        uint8_t* buffer;
-        uint8_t* read_ptr;
-        uint8_t* write_ptr;
+        size_t size = 512;
+        uint8_t* buffer = nullptr;
+        uint8_t* read_ptr = nullptr;
+        uint8_t* write_ptr = nullptr;
 
         size_t empty_space();
         void resize(size_t);
