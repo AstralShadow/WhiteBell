@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1621635776 source:/workspace/c++/WhiteBell/src/Server.cpp
+1622200433 source:/workspace/c++/WhiteBell/src/Server.cpp
 	"Server.h"
 	"Client.h"
 	"Client_DisconnectedException.h"
 	"Namespace.h"
 	"config.h"
+	<iostream>
 	<string>
 	<unordered_set>
 	<queue>
@@ -14,7 +15,7 @@
 	<unistd.h>
 	<cstdio>
 
-1621640929 /workspace/c++/WhiteBell/include/Server.h
+1622200043 /workspace/c++/WhiteBell/include/Server.h
 	<cstdint>
 	<string>
 	<vector>
@@ -31,13 +32,14 @@
 	<string>
 	<cstdint>
 
-1621254595 source:/workspace/c++/WhiteBell/main.cpp
+1622200177 source:/workspace/c++/WhiteBell/main.cpp
 	<iostream>
 	<signal.h>
 	"include/config.h"
 	"include/Server.h"
+	"include/Client.h"
 
-1621642088 source:/workspace/c++/WhiteBell/src/Client.cpp
+1622200486 source:/workspace/c++/WhiteBell/src/Client.cpp
 	"Client.h"
 	"Client_InputBuffer.h"
 	"Client_DisconnectedException.h"
@@ -45,6 +47,7 @@
 	"Server.h"
 	"Namespace.h"
 	<algorithm>
+	<unistd.h>
 
 1621642038 /workspace/c++/WhiteBell/include/Client.h
 	<sys/socket.h>

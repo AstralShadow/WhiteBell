@@ -3,6 +3,7 @@
 #include "Client_DisconnectedException.h"
 #include "Namespace.h"
 #include "config.h"
+#include <iostream>
 #include <string>
 #include <unordered_set>
 #include <queue>
@@ -12,11 +13,15 @@
 #include <unistd.h>
 #include <cstdio>
 
+using std::cout;
+using std::endl;
 using std::string;
 using std::unordered_set;
 using std::queue;
 using std::shared_ptr;
 using std::weak_ptr;
+
+const uint8_t Server::version = 102;
 
 struct sockaddr_un
 {
@@ -70,9 +75,13 @@ void Server::listen()
 Server::~Server()
 {
     this->disconnect_all_clients();
+    ::shutdown(this->server_socket, SHUT_WR);
     close(this->server_socket);
 
     sockaddr_un* address = reinterpret_cast<sockaddr_un*>(this->server_address);
+    if(!config::quiet_mode){
+        cout << "Removing: " << address->sun_path << endl;
+    }
     remove(address->sun_path);
     delete this->server_address;
 }

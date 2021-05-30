@@ -29,6 +29,8 @@ class Server
         void operator = (const Server&) = delete;
         virtual ~Server();
 
+        static const uint8_t version;
+
         void run();
         void stop();
 

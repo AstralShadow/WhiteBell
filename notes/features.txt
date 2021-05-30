@@ -4,3 +4,6 @@ Counters - counts active connections marked to given counter
 CounterEvents - allow listening to events that include simple comparasion and counters (= < >) and onChange
  - default values for counters are zero, so any non-existent counter is treated as a zero, and any zero-ed counter is to be removed from memory.
 
+
+TODO: use poll instead select;
+TODO: think something about porting to windows.

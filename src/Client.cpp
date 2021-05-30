@@ -5,6 +5,7 @@
 #include "Server.h"
 #include "Namespace.h"
 #include <algorithm>
+#include <unistd.h>
 
 using std::find;
 
@@ -24,6 +25,8 @@ Client::~Client()
 {
     delete this->buffer;
     delete this->parser;
+    ::shutdown(this->get_fd(), SHUT_WR);
+    close(this->get_fd());
 }
 
 ssize_t Client::get_fd() const

@@ -2,6 +2,7 @@
 #include <signal.h>
 #include "include/config.h"
 #include "include/Server.h"
+#include "include/Client.h"
 
 using std::endl;
 using std::cout;
@@ -18,7 +19,10 @@ int main()
 
     string location = config::get_sock_location();
     if(!config::quiet_mode){
-        cout << "Starting WhiteBell server at " << location << endl;
+        cout << "Starting WhiteBell server." << endl;
+        cout << "Server version: " << (int)Server::version << endl;
+        cout << "Protocol version: " << (int)Client::protocol_version << endl;
+        cout << "Binding location: " << location << endl;
     }
     server = new Server(location);
     server->run();
