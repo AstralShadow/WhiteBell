@@ -10,7 +10,8 @@ using std::vector;
 using std::copy;
 using std::move;
 
-Client::InputBuffer::InputBuffer(){
+Client::InputBuffer::InputBuffer()
+{
     this->buffer = new uint8_t[this->size];
     this->read_ptr = this->buffer;
     this->write_ptr = this->buffer;

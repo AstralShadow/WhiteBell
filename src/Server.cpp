@@ -200,6 +200,11 @@ void Server::add_client(ssize_t client_fd)
 
 void Server::remove_client(shared_ptr<Client> client)
 {
+    shared_ptr<Namespace> space = client->get_namespace();
+    if(space != nullptr){
+        space->remove_client(client);
+    }
+
     auto itr = this->connections.find(client);
     this->connections.erase(itr);
 }

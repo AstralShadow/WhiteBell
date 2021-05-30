@@ -48,6 +48,11 @@ shared_ptr<Client> Client::get_ptr()
     return this->_self->lock();
 }
 
+shared_ptr<Namespace> Client::get_namespace() const
+{
+    return this->_namespace;
+}
+
 vector<name_t> Client::get_tracked_events() const
 {
     return this->tracked_events;

@@ -82,7 +82,14 @@ void Namespace::add_counter_listener(const name_t& name, shared_ptr<Client> clie
 {
     auto& counter = this->counter_listeners[name];
     counter.push_back(weak_ptr<Client>(client));
-    client->send_counter_event(name, counter.size());
+
+    uint32_t value = 0;
+
+    auto counters_itr = this->counters.find(name);
+    if(counters_itr != this->counters.end())
+        value = counters_itr->second.size();
+
+    client->send_counter_event(name, value);
 }
 
 void Namespace::remove_counter_listener(const name_t& name, shared_ptr<Client> client)

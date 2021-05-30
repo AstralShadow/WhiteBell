@@ -29,6 +29,7 @@ class Client
 
         ssize_t get_fd() const;
         shared_ptr<Client> get_ptr();
+        shared_ptr<Namespace> get_namespace() const;
 
         vector<name_t> get_tracked_events() const;
         vector<name_t> get_tracked_counters() const;
