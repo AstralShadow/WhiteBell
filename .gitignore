@@ -2,3 +2,5 @@ obj/
 bin/
 *.save
 *.layout
+gmon.out
+
