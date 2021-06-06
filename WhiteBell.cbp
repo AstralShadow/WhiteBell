@@ -28,12 +28,14 @@
 					<Add option="-pedantic" />
 					<Add option="-Wextra" />
 					<Add option="-Wall" />
-					<Add option="-std=c++11" />
+					<Add option="-pg" />
 					<Add option="-Og" />
 					<Add option="-g" />
+					<Add option="-std=c++11" />
 					<Add directory="include" />
 				</Compiler>
 				<Linker>
+					<Add option="-pg" />
 					<Add option="-lpthread" />
 				</Linker>
 			</Target>
@@ -56,6 +58,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-std=c11" />
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="LICENSE" />

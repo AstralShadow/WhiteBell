@@ -10,6 +10,9 @@
 #include <memory>
 #include <cstring>
 #include <sys/socket.h>
+#include <sys/un.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
 #include <unistd.h>
 #include <cstdio>
 
@@ -21,17 +24,23 @@ using std::queue;
 using std::shared_ptr;
 using std::weak_ptr;
 
+
 const uint8_t Server::version = 102;
 
-struct sockaddr_un
+Server::Server(string location) :
+    server_address(generate_server_address(location)),
+    server_addr_len(sizeof(struct sockaddr_un)),
+    server_socket(create_unix_socket())
 {
-    sa_family_t sun_family = AF_UNIX;
-    char sun_path[108];
-};
+    this->bind_socket();
+    this->listen();
+}
 
-Server::Server(string location){
-    this->server_address = generate_server_address(location);
-    this->server_socket = create_unix_socket();
+Server::Server(uint16_t port) :
+    server_address(generate_server_address(port)),
+    server_addr_len(sizeof(struct sockaddr_in)),
+    server_socket(create_tcp_socket())
+{
     this->bind_socket();
     this->listen();
 }
@@ -39,7 +48,16 @@ Server::Server(string location){
 sockaddr* Server::generate_server_address(string location)
 {
     sockaddr_un* address = new sockaddr_un;
+    address->sun_family = AF_UNIX;
     strcpy(address->sun_path, location.c_str());
+    return reinterpret_cast<sockaddr*>(address);
+}
+
+sockaddr* Server::generate_server_address(uint16_t port)
+{
+    sockaddr_in* address = new sockaddr_in;
+    address->sin_family = AF_INET;
+    address->sin_port = htons(port);
     return reinterpret_cast<sockaddr*>(address);
 }
 
@@ -53,10 +71,20 @@ ssize_t Server::create_unix_socket()
     return fd;
 }
 
+ssize_t Server::create_tcp_socket()
+{
+    ssize_t fd = socket(AF_INET, SOCK_STREAM, 0);
+    if(fd < 0){
+        perror("Could not create socket.");
+        exit(1);
+    }
+    return fd;
+}
+
 void Server::bind_socket()
 {
     ssize_t source_fd = this->server_socket;
-    if(bind(source_fd, this->server_address, sizeof(struct sockaddr_un))){
+    if(bind(source_fd, this->server_address, this->server_addr_len)){
         perror("Binding error.");
         exit(1);
     }
@@ -180,7 +208,7 @@ void Server::accept_new_client()
 {
     ssize_t server_fd = this->server_socket;
     sockaddr* address = this->server_address;
-    socklen_t address_size = sizeof(struct sockaddr_un);
+    socklen_t address_size = this->server_addr_len;
 
     ssize_t client_fd = accept4(server_fd, address, &address_size, SOCK_NONBLOCK);
 

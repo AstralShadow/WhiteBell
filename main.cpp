@@ -18,13 +18,16 @@ int main()
     signal(SIGTERM, signal_callback_handler);
 
     string location = config::get_sock_location();
+    string ip = config::get_host_ip();
+    int port = config::get_host_port();
     if(!config::quiet_mode){
         cout << "Starting WhiteBell server." << endl;
         cout << "Server version: " << (int)Server::version << endl;
         cout << "Protocol version: " << (int)Client::protocol_version << endl;
-        cout << "Binding location: " << location << endl;
+    //    cout << "Binding as unix stream: " << location << endl;
+        cout << "Binding as TCP: " << port << endl;
     }
-    server = new Server(location);
+    server = new Server(port);
     server->run();
 
     return 0;

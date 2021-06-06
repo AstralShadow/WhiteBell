@@ -25,6 +25,7 @@ class Server
 {
     public:
         Server(string);
+        Server(uint16_t);
         Server(const Server&) = delete;
         void operator = (const Server&) = delete;
         virtual ~Server();
@@ -40,6 +41,7 @@ class Server
 
     private:
         sockaddr* server_address;
+        size_t server_addr_len;
         ssize_t server_socket;
         unordered_set<shared_ptr<Client>> connections = {};
         queue<weak_ptr<Client>> unprocessed = {};
@@ -48,7 +50,9 @@ class Server
         vector<weak_ptr<Namespace>> namespaces = {};
 
         sockaddr* generate_server_address(string location);
+        sockaddr* generate_server_address(uint16_t port);
         ssize_t create_unix_socket();
+        ssize_t create_tcp_socket();
         void bind_socket();
         void listen();
 

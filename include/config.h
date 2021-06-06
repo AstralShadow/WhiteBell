@@ -11,6 +11,8 @@ namespace config{
     extern const uint8_t max_pending_connections;
 
     string get_sock_location();
+    string get_host_ip();
+    uint16_t get_host_port();
 }
 
 #endif // CONFIG_H_INCLUDED
