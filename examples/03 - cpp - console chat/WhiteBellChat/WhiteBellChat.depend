@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1623153481 source:/workspace/c++/WhiteBell/examples/03 - cpp - console chat/WhiteBellChat/main.cpp
+	<iostream>
+	"WhiteBellClient.hpp"
+
+1623153534 /workspace/c++/WhiteBell/clients/c++/WhiteBellClient/include/WhiteBellClient.hpp
+

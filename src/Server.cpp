@@ -105,12 +105,18 @@ Server::~Server()
     ::shutdown(this->server_socket, SHUT_WR);
     close(this->server_socket);
 
+    if(this->server_address->sa_family == AF_UNIX)
+        this->remove_unix_endpoint();
+
+    delete this->server_address;
+}
+
+void Server::remove_unix_endpoint(){
     sockaddr_un* address = reinterpret_cast<sockaddr_un*>(this->server_address);
     if(!config::quiet_mode){
         cout << "Removing: " << address->sun_path << endl;
     }
     remove(address->sun_path);
-    delete this->server_address;
 }
 
 void Server::disconnect_all_clients()

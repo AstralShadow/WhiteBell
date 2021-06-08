@@ -55,6 +55,7 @@ class Server
         ssize_t create_tcp_socket();
         void bind_socket();
         void listen();
+        void remove_unix_endpoint();
 
         void run_main_thread();
         void run_worker_thread();

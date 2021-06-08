@@ -1,5 +1,93 @@
 # depslib dependency file v1.0
-1622942761 source:/workspace/c++/WhiteBell/src/Server.cpp
+1623145285 source:/workspace/c++/WhiteBell/main.cpp
+	<iostream>
+	<signal.h>
+	"include/config.h"
+	"include/Server.h"
+	"include/Client.h"
+
+1622941319 /workspace/c++/WhiteBell/include/config.h
+	<string>
+	<cstdint>
+
+1623145511 /workspace/c++/WhiteBell/include/Server.h
+	<cstdint>
+	<string>
+	<vector>
+	<unordered_set>
+	<queue>
+	<memory>
+
+1622371548 /workspace/c++/WhiteBell/include/Client.h
+	<sys/socket.h>
+	<cstdint>
+	<vector>
+	<memory>
+
+1622371683 source:/workspace/c++/WhiteBell/src/Client.cpp
+	"Client.h"
+	"Client_InputBuffer.h"
+	"Client_DisconnectedException.h"
+	"Client_Parser.h"
+	"Server.h"
+	"Namespace.h"
+	<algorithm>
+	<unistd.h>
+	<iostream>
+
+1622367257 /workspace/c++/WhiteBell/include/Client_InputBuffer.h
+	"Client.h"
+	<sys/socket.h>
+	<cstdint>
+	<vector>
+
+1621615673 /workspace/c++/WhiteBell/include/Client_DisconnectedException.h
+	"Client.h"
+	<string>
+	<exception>
+
+1621631139 /workspace/c++/WhiteBell/include/Client_Parser.h
+	"Client.h"
+	<cstdint>
+	<vector>
+
+1622367483 /workspace/c++/WhiteBell/include/Namespace.h
+	<cstdint>
+	<vector>
+	<memory>
+	<map>
+
+1621611503 source:/workspace/c++/WhiteBell/src/Client_DisconnectedException.cpp
+	"Client.h"
+	"Client_DisconnectedException.h"
+	<string>
+
+1622371675 source:/workspace/c++/WhiteBell/src/Client_InputBuffer.cpp
+	"Client.h"
+	"Client_InputBuffer.h"
+	"Client_DisconnectedException.h"
+	<cstdint>
+	<sys/socket.h>
+	<vector>
+	<algorithm>
+
+1621631525 source:/workspace/c++/WhiteBell/src/Client_Parser.cpp
+	"Client.h"
+	"Client_Parser.h"
+	"Client_InputBuffer.h"
+	"Server.h"
+
+1622940634 source:/workspace/c++/WhiteBell/src/config.cpp
+	"config.h"
+	<cstdint>
+	<string>
+
+1622372183 source:/workspace/c++/WhiteBell/src/Namespace.cpp
+	"Namespace.h"
+	"Client.h"
+	<algorithm>
+
+1623146413 source:/workspace/c++/WhiteBell/src/Server.cpp
 	"Server.h"
 	"Client.h"
 	"Client_DisconnectedException.h"
@@ -17,92 +105,4 @@
 	<netinet/ip.h>
 	<unistd.h>
 	<cstdio>
-
-1622942870 /workspace/c++/WhiteBell/include/Server.h
-	<cstdint>
-	<string>
-	<vector>
-	<unordered_set>
-	<queue>
-	<memory>
-
-1622940634 source:/workspace/c++/WhiteBell/src/config.cpp
-	"config.h"
-	<cstdint>
-	<string>
-
-1622941319 /workspace/c++/WhiteBell/include/config.h
-	<string>
-	<cstdint>
-
-1622941326 source:/workspace/c++/WhiteBell/main.cpp
-	<iostream>
-	<signal.h>
-	"include/config.h"
-	"include/Server.h"
-	"include/Client.h"
-
-1622371683 source:/workspace/c++/WhiteBell/src/Client.cpp
-	"Client.h"
-	"Client_InputBuffer.h"
-	"Client_DisconnectedException.h"
-	"Client_Parser.h"
-	"Server.h"
-	"Namespace.h"
-	<algorithm>
-	<unistd.h>
-	<iostream>
-
-1622371548 /workspace/c++/WhiteBell/include/Client.h
-	<sys/socket.h>
-	<cstdint>
-	<vector>
-	<memory>
-
-1622371675 source:/workspace/c++/WhiteBell/src/Client_InputBuffer.cpp
-	"Client.h"
-	"Client_InputBuffer.h"
-	"Client_DisconnectedException.h"
-	<cstdint>
-	<sys/socket.h>
-	<vector>
-	<algorithm>
-
-1622367257 /workspace/c++/WhiteBell/include/Client_InputBuffer.h
-	"Client.h"
-	<sys/socket.h>
-	<cstdint>
-	<vector>
-
-1621611503 source:/workspace/c++/WhiteBell/src/Client_DisconnectedException.cpp
-	"Client.h"
-	"Client_DisconnectedException.h"
-	<string>
-
-1621615673 /workspace/c++/WhiteBell/include/Client_DisconnectedException.h
-	"Client.h"
-	<string>
-	<exception>
-
-1621631139 /workspace/c++/WhiteBell/include/Client_Parser.h
-	"Client.h"
-	<cstdint>
-	<vector>
-
-1621631525 source:/workspace/c++/WhiteBell/src/Client_Parser.cpp
-	"Client.h"
-	"Client_Parser.h"
-	"Client_InputBuffer.h"
-	"Server.h"
-
-1622372183 source:/workspace/c++/WhiteBell/src/Namespace.cpp
-	"Namespace.h"
-	"Client.h"
-	<algorithm>
-
-1622367483 /workspace/c++/WhiteBell/include/Namespace.h
-	<cstdint>
-	<vector>
-	<memory>
-	<map>
 

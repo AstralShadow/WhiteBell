@@ -27,6 +27,7 @@ int main()
     //    cout << "Binding as unix stream: " << location << endl;
         cout << "Binding as TCP: " << port << endl;
     }
+
     server = new Server(port);
     server->run();
 

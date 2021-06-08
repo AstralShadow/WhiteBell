@@ -48,16 +48,24 @@ class Client
     ];
 
     private \Socket $socket;
+    private string $namespace;
 
-    public function __construct(string $unixFD, string $namespace) {
-        $this->connect($unixFD);
-        $this->fetch();
-        $this->setNamespace($namespace);
+    public function __construct(string $namespace) {
+        $this->namespace = $namespace;
     }
 
-    private function connect(string $unitFD): void {
+    public function connectUNIX(string $unitFD): void {
         $this->socket = socket_create(AF_UNIX, SOCK_STREAM, 0);
         socket_connect($this->socket, $unitFD);
+        $this->fetch();
+        $this->setNamespace($this->namespace);
+    }
+
+    public function connectTCP(string $ip, int $port): void {
+        $this->socket = socket_create(AF_INET, SOCK_STREAM, 0);
+        socket_connect($this->socket, $ip, $port);
+        $this->fetch();
+        $this->setNamespace($this->namespace);
     }
 
     /* Namespace */

@@ -3,7 +3,7 @@
 require "../../clients/php/WhiteBellClient.php";
 
 $whitebell = new \WhiteBell\Client("PHP console clock");
-$whitebell->connectUNIX("../../whitebell.sock");
+$whitebell->connectTCP("127.0.0.1", 25250);
 
 $whitebell->addCounterListener("scripts", function ($count){
     echo "Connected scripts: " . $count . "\n";

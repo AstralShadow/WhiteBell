@@ -2,7 +2,8 @@
 
 require "../../clients/php/WhiteBellClient.php";
 
-$whitebell = new \WhiteBell\Client("../../whitebell.sock", "PHP console clock");
+$whitebell = new \WhiteBell\Client("PHP console clock");
+$whitebell->connectUNIX("../../whitebell.sock");
 
 while (1){
     $time = time();
