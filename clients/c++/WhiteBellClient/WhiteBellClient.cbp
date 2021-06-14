@@ -34,9 +34,18 @@
 				</Linker>
 			</Target>
 		</Build>
-		<Unit filename="main.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="include/Client_Details.hpp" />
+		<Unit filename="include/DisconnectedException.hpp" />
+		<Unit filename="include/InputBuffer.hpp" />
+		<Unit filename="include/OPCode.hpp" />
+		<Unit filename="include/UnsupportedProtocolException.hpp" />
+		<Unit filename="include/WhiteBellClient.hpp" />
+		<Unit filename="include/cstring_t.hpp" />
+		<Unit filename="src/Client.cpp" />
+		<Unit filename="src/Client_Details.cpp" />
+		<Unit filename="src/Client_Details_processing.cpp" />
+		<Unit filename="src/InputBuffer.cpp" />
+		<Unit filename="src/cstring_t.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

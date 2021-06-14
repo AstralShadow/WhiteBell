@@ -14,7 +14,6 @@
 #include <netinet/in.h>
 #include <netinet/ip.h>
 #include <unistd.h>
-#include <cstdio>
 
 using std::cout;
 using std::endl;

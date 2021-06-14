@@ -31,7 +31,12 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="../../../clients/c++/WhiteBellClient/include" />
 		</Compiler>
+		<Linker>
+			<Add option="-lpthread" />
+			<Add library="../../../clients/c++/WhiteBellClient/bin/Debug/libWhiteBellClient.a" />
+		</Linker>
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

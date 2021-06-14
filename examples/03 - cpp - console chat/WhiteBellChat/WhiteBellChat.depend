@@ -1,7 +1,26 @@
 # depslib dependency file v1.0
-1623153481 source:/workspace/c++/WhiteBell/examples/03 - cpp - console chat/WhiteBellChat/main.cpp
+1623666252 source:/workspace/c++/WhiteBell/examples/03 - cpp - console chat/WhiteBellChat/main.cpp
 	<iostream>
+	<thread>
+	<vector>
 	"WhiteBellClient.hpp"
 
-1623153534 /workspace/c++/WhiteBell/clients/c++/WhiteBellClient/include/WhiteBellClient.hpp
+1623666302 /workspace/c++/WhiteBell/clients/c++/WhiteBellClient/include/WhiteBellClient.hpp
+	<cstdint>
+	"cstring_t.hpp"
+	"DisconnectedException.hpp"
+	"UnsupportedProtocolException.hpp"
+
+1623662197 /workspace/c++/WhiteBell/clients/c++/WhiteBellClient/include/cstring_t.hpp
+	<cstdint>
+	<cstddef>
+	<string>
+
+1623332218 /workspace/c++/WhiteBell/clients/c++/WhiteBellClient/include/DisconnectedException.hpp
+	<string>
+	<exception>
+
+1623332192 /workspace/c++/WhiteBell/clients/c++/WhiteBellClient/include/UnsupportedProtocolException.hpp
+	<string>
+	<exception>
 
