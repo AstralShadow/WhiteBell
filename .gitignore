@@ -1,5 +1,6 @@
 obj/
 bin/
+.pio/
 *.save
 *.layout
 *.gch
