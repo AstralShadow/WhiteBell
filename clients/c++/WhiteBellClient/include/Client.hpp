@@ -1,12 +1,11 @@
-#ifndef WHITEBELLCLIENT_HPP_INCLUDED
-#define WHITEBELLCLIENT_HPP_INCLUDED
+#ifndef CLIENT_HPP_INCLUDED
+#define CLIENT_HPP_INCLUDED
 
 #include <cstdint>
 #include "cstring_t.hpp"
 
 #include "DisconnectedException.hpp"
 #include "UnsupportedProtocolException.hpp"
-
 
 namespace WhiteBell
 {
@@ -21,18 +20,26 @@ namespace WhiteBell
             Client(Client&) = delete;
             virtual ~Client();
 
-
             void fetch();
             void run();
             void stop(); // will stop after next received message.
 
-
             void set_namespace(cstring_t const& = "");
-
 
             void track_event(cstring_t const&, event_cb_t);
             void untrack_event(cstring_t const&, event_cb_t);
             void untrack_event(cstring_t const&);
+
+            void trigger_event(cstring_t const& name, cstring_t const& payload);
+
+            void track_counter(cstring_t const&, counter_cb_t);
+            void untrack_counter(cstring_t const&, counter_cb_t);
+            void untrack_counter(cstring_t const&);
+
+            void join_counter(cstring_t const&);
+            void leave_counter(cstring_t const&);
+
+            // Alias functions:
 
             void add_event_listener(cstring_t const& name, event_cb_t callback)
             {
@@ -47,17 +54,10 @@ namespace WhiteBell
                 this->untrack_event(name);
             }
 
-
-            void trigger_event(cstring_t const& name, cstring_t const& payload);
             void dispatch_event(cstring_t const& name, cstring_t const& payload)
             {
                 this->trigger_event(name, payload);
             }
-
-
-            void track_counter(cstring_t const&, counter_cb_t);
-            void untrack_counter(cstring_t const&, counter_cb_t);
-            void untrack_counter(cstring_t const&);
 
             void add_counter_listener(cstring_t const& name, counter_cb_t callback)
             {
@@ -73,8 +73,6 @@ namespace WhiteBell
             }
 
 
-            void join_counter(cstring_t const&);
-            void leave_counter(cstring_t const&);
 
         private:
             struct Details;
@@ -82,5 +80,4 @@ namespace WhiteBell
     };
 }
 
-
-#endif // WHITEBELLCLIENT_HPP_INCLUDED
+#endif // CLIENT_HPP_INCLUDED

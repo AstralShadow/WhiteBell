@@ -34,12 +34,13 @@
 				</Linker>
 			</Target>
 		</Build>
+		<Unit filename="include/Client.hpp" />
 		<Unit filename="include/Client_Details.hpp" />
 		<Unit filename="include/DisconnectedException.hpp" />
 		<Unit filename="include/InputBuffer.hpp" />
 		<Unit filename="include/OPCode.hpp" />
 		<Unit filename="include/UnsupportedProtocolException.hpp" />
-		<Unit filename="include/WhiteBellClient.hpp" />
+		<Unit filename="include/WhiteBell_Client.hpp" />
 		<Unit filename="include/cstring_t.hpp" />
 		<Unit filename="src/Client.cpp" />
 		<Unit filename="src/Client_Details.cpp" />

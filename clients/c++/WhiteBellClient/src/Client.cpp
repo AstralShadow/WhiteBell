@@ -1,4 +1,5 @@
-#include "../include/WhiteBellClient.hpp"
+#include "../include/cstring_t.hpp"
+#include "../include/Client.hpp"
 #include "../include/Client_Details.hpp"
 #include "../include/OPCode.hpp"
 #include <sys/select.h>

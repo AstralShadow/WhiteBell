@@ -2,5 +2,7 @@ obj/
 bin/
 *.save
 *.layout
+*.gch
+*.pch
 gmon.out
 

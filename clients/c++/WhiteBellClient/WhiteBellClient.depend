@@ -1,1 +1,94 @@
 # depslib dependency file v1.0
+1623334237 source:/workspace/c++/WhiteBell/clients/c++/WhiteBellClient/src/cstring_t.cpp
+	"../include/cstring_t.hpp"
+	<cstring>
+	<memory>
+
+1623662197 /workspace/c++/WhiteBell/clients/c++/WhiteBellClient/include/cstring_t.hpp
+	<cstdint>
+	<cstddef>
+	<string>
+
+1623937584 source:/workspace/c++/WhiteBell/clients/c++/WhiteBellClient/src/InputBuffer.cpp
+	"../include/InputBuffer.hpp"
+	"../include/DisconnectedException.hpp"
+	<cstdint>
+	<sys/socket.h>
+	<vector>
+	<algorithm>
+
+1623937584 /workspace/c++/WhiteBell/clients/c++/WhiteBellClient/include/InputBuffer.hpp
+	<sys/socket.h>
+	<cstdint>
+	<vector>
+
+1623332218 /workspace/c++/WhiteBell/clients/c++/WhiteBellClient/include/DisconnectedException.hpp
+	<string>
+	<exception>
+
+1624012345 source:/workspace/c++/WhiteBell/clients/c++/WhiteBellClient/src/Client.cpp
+	"../include/cstring_t.hpp"
+	"../include/Client.hpp"
+	"../include/Client_Details.hpp"
+	"../include/OPCode.hpp"
+	<sys/select.h>
+	<vector>
+	<map>
+	<algorithm>
+
+1624012091 /workspace/c++/WhiteBell/clients/c++/WhiteBellClient/include/WhiteBellClient.hpp
+	"Client.hpp"
+	"cstring_t.hpp"
+	"DisconnectedException.hpp"
+	"UnsupportedProtocolException.hpp"
+
+1624012254 /workspace/c++/WhiteBell/clients/c++/WhiteBellClient/include/Client.hpp
+	<cstdint>
+	"cstring_t.hpp"
+	"DisconnectedException.hpp"
+	"UnsupportedProtocolException.hpp"
+
+1623332192 /workspace/c++/WhiteBell/clients/c++/WhiteBellClient/include/UnsupportedProtocolException.hpp
+	<string>
+	<exception>
+
+1624012296 /workspace/c++/WhiteBell/clients/c++/WhiteBellClient/include/Client_Details.hpp
+	"cstring_t.hpp"
+	"Client.hpp"
+	"OPCode.hpp"
+	<sys/socket.h>
+	<vector>
+	<map>
+	<string>
+
+1623328237 /workspace/c++/WhiteBell/clients/c++/WhiteBellClient/include/OPCode.hpp
+
+1624012348 source:/workspace/c++/WhiteBell/clients/c++/WhiteBellClient/src/Client_Details.cpp
+	"../include/cstring_t.hpp"
+	"../include/Client.hpp"
+	"../include/Client_Details.hpp"
+	"../include/InputBuffer.hpp"
+	<sys/socket.h>
+	<sys/un.h>
+	<netinet/in.h>
+	<netinet/ip.h>
+	<arpa/inet.h>
+	<sys/unistd.h>
+	<memory>
+	<vector>
+	<map>
+	<iostream>
+
+1624012353 source:/workspace/c++/WhiteBell/clients/c++/WhiteBellClient/src/Client_Details_processing.cpp
+	"../include/cstring_t.hpp"
+	"../include/Client.hpp"
+	"../include/Client_Details.hpp"
+	"../include/OPCode.hpp"
+	"../include/InputBuffer.hpp"
+
+1624012091 source:/workspace/c++/WhiteBell/clients/c++/WhiteBellClient/include/main.hpp
+	"Client.hpp"
+	"cstring_t.hpp"
+	"DisconnectedException.hpp"
+	"UnsupportedProtocolException.hpp"
+

@@ -1,7 +1,8 @@
 #ifndef CLIENT_DETAILS_HPP_INCLUDED
 #define CLIENT_DETAILS_HPP_INCLUDED
 
-#include "WhiteBellClient.hpp"
+#include "cstring_t.hpp"
+#include "Client.hpp"
 #include "OPCode.hpp"
 #include <sys/socket.h>
 #include <vector>
