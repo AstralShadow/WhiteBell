@@ -78,18 +78,26 @@ class Client
 
     private array $eventListeners = [];
 
+    public function trackEvent(string $name, callable $cb): bool {
+        return $this->addEventListener($name, $cb);
+    }
+
     public function addEventListener(string $name, callable $cb): bool {
         if (isset($this->eventListeners[$name])){
             $this->eventListeners[$name][] = $cb;
             return true;
         }
         $this->eventListeners[$name] = [$cb];
-        return $this->trackEvent($name);
+        return $this->_trackEvent($name);
     }
 
     public function removeEventListener(string $name, callable $cb = null): bool {
         if (!isset($this->eventListeners[$name])){
             return true;
+        }
+        if ($cb == null){
+            unset($this->eventListeners[$name]);
+            return $this->_untrackEvent($name);
         }
 
         $index = array_search($cb, $this->eventListeners[$name]);
@@ -100,16 +108,16 @@ class Client
         array_splice($this->eventListeners[$name], $index, 1);
         if (!count($this->eventListeners[$name])){
             unset($this->eventListeners[$name]);
-            return $this->untrackEvent($name);
+            return $this->_untrackEvent($name);
         }
         return true;
     }
 
-    private function trackEvent(string $name): bool {
+    private function _trackEvent(string $name): bool {
         return $this->send(self::HEADERS["trackEvent"], $name);
     }
 
-    private function untrackEvent(string $name): bool {
+    private function _untrackEvent(string $name): bool {
         return $this->send(self::HEADERS["untrackEvent"], $name);
     }
 
@@ -126,18 +134,30 @@ class Client
 
     private array $counterListeners = [];
 
+    public function trackCounter(string $name, callable $cb): bool {
+        return $this->addCounterListener($name, $cb);
+    }
+
+    public function untrackCounter(string $name, callable $cb = null): bool {
+        return $this->removeCounterListener($name, $cb);
+    }
+
     public function addCounterListener(string $name, callable $cb): bool {
         if (isset($this->counterListeners[$name])){
             $this->counterListeners[$name][] = $cb;
             return true;
         }
         $this->counterListeners[$name] = [$cb];
-        return $this->trackCounter($name);
+        return $this->_trackCounter($name);
     }
 
     public function removeCounterListener(string $name, callable $cb = null): bool {
         if (!isset($this->counterListeners[$name])){
             return true;
+        }
+        if ($cb == null){
+            unset($this->counterListeners[$name]);
+            return $this->_untrackCounter($name);
         }
 
         $index = array_search($cb, $this->counterListeners[$name]);
@@ -148,16 +168,16 @@ class Client
         array_splice($this->counterListeners[$name], $index, 1);
         if (!count($this->counterListeners[$name])){
             unset($this->counterListeners[$name]);
-            return $this->untrackCounter($name);
+            return $this->_untrackCounter($name);
         }
         return true;
     }
 
-    private function trackCounter(string $name): bool {
+    private function _trackCounter(string $name): bool {
         return $this->send(self::HEADERS["trackCounter"], $name);
     }
 
-    private function untrackCounter(string $name): bool {
+    private function _untrackCounter(string $name): bool {
         return $this->send(self::HEADERS["untrackCounter"], $name);
     }
 
