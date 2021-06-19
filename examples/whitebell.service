@@ -1,0 +1,14 @@
+[Unit]
+Description=A fast message repeater for simple multiprocess communication.
+After=network.target
+
+[Service]
+Type=simple
+RuntimeDirectory=whitebell
+User=http
+Group=http
+ExecStart=/etc/whitebell/whitebell
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
