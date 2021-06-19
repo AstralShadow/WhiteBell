@@ -1,0 +1,6 @@
+#ifndef WHITEBELLCLIENT_HPP_INCLUDED
+#define WHITEBELLCLIENT_HPP_INCLUDED
+
+#include "include/Client.hpp"
+
+#endif // WHITEBELLCLIENT_HPP_INCLUDED
