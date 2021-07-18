@@ -57,6 +57,7 @@ class Client
     public function connectUNIX(string $unitFD): void {
         $this->socket = socket_create(AF_UNIX, SOCK_STREAM, 0);
         socket_connect($this->socket, $unitFD);
+        socket_set_nonblock($this->socket);
         $this->fetch();
         $this->setNamespace($this->namespace);
     }
@@ -64,6 +65,7 @@ class Client
     public function connectTCP(string $ip, int $port): void {
         $this->socket = socket_create(AF_INET, SOCK_STREAM, 0);
         socket_connect($this->socket, $ip, $port);
+        socket_set_nonblock($this->socket);
         $this->fetch();
         $this->setNamespace($this->namespace);
     }
@@ -216,7 +218,7 @@ class Client
 
     public function fetch(): void {
         $input = "";
-        while ($res = socket_recv($this->socket, $input, 512, MSG_DONTWAIT)){
+        while ($res = socket_recv($this->socket, $input, 512, 0)){
             if ($res === null){
                 throw socket_strerror(socket_last_error());
             }
@@ -310,7 +312,7 @@ class Client
                 return $avaliable >= $this->nameLen;
 
             case self::PROCESSING_STEPS["payload"]:
-                return $avaliable >= $this->nameLen;
+                return $avaliable >= $this->payloadLen;
 
             case self::PROCESSING_STEPS["callCounterListeners"]:
             case self::PROCESSING_STEPS["callEventListeners"]:

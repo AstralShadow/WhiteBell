@@ -26,8 +26,9 @@ void setup()
     pinMode(LED_BUILTIN_AUX, OUTPUT);
     Serial.begin(9600);
 
-    const char ssid[17] = "My WiFi"; // your SSID
-    WiFi.begin(ssid, "");
+    const char ssid[] = "My WiFi"; // your SSID
+    const char pass[] = "My Pass"; // your password
+    WiFi.begin(ssid, pass);
     WiFi_await_connected();
     bell = new WhiteBell::Client(server_ip, 25250);
     bell->set_namespace("arduino test");
