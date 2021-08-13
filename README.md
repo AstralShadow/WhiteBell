@@ -31,6 +31,7 @@ The project file is /WhiteBell.cbp
 Currently you may need to edit:
 * main.cpp - to switch between TCP or UNIX socket mode.
 * src/config.cpp - to change your port or UNIX socket location.  
+  
 You can configure it as systemd service, based on the example
 configuration in examples/whitebell.service
 
